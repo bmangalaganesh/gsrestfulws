@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @XmlRootElement(name = "greeting")
 @XmlType(propOrder = {"id", "content"})
-@JsonPropertyOrder({"id", "content"})
+@JsonPropertyOrder({"content", "id"})
 public class Greeting {
 
 	@XmlElement
