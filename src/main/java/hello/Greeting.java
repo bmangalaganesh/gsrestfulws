@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -17,8 +18,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 
 @XmlRootElement(name = "greeting")
-@XmlType(propOrder = {"id", "content"})
-@JsonPropertyOrder({"content", "id"})
+//@XmlType(propOrder = {"id", "content"})
+//@JsonPropertyOrder({"content", "id"})
 public class Greeting {
 
 	@XmlElement
@@ -26,6 +27,11 @@ public class Greeting {
 	
 	@XmlElement
 	private final String content;
+	
+	@XmlElement
+	@JsonIgnore
+	//use Json Ignore if you want to explictly ignore a field from being marshalled as a Json payload
+	private final String isAnnotationRequired;
 
 	//
 	/**
@@ -42,12 +48,14 @@ public class Greeting {
 	public Greeting() {
 		this.id = 1;
 		content = "default";
+		isAnnotationRequired = "true";
 
 	}
 
-	public Greeting(long id, String content) {
+	public Greeting(long id, String content, String isAnnotationRequired) {
 		this.id = id;
 		this.content = content;
+		this.isAnnotationRequired = isAnnotationRequired;
 	}
 
 	public long getId() {
@@ -56,6 +64,10 @@ public class Greeting {
 
 	public String getContent() {
 		return content;
+	}
+
+	public String getIsAnnotationRequired() {
+		return isAnnotationRequired;
 	}
 
 }

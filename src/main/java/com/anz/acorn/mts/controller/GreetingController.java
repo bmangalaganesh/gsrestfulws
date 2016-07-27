@@ -24,7 +24,7 @@ public class GreetingController {
 	    @RequestMapping(value="/greeting",method={RequestMethod.POST,RequestMethod.GET},produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	    public Greeting greeting(@RequestParam(value="newparamname", defaultValue="World") String name) {
 	        return new Greeting(counter.incrementAndGet(),
-	                            String.format(template, name));
+	                            String.format(template, name),"testing only");
 	    }
 
 
