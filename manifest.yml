@@ -1,0 +1,7 @@
+applications:
+- disk_quota: 1024M
+  host: springrestlearning
+  name: SpringResfulWSLearning
+  path: .
+  instances: 1
+  memory: 512M
