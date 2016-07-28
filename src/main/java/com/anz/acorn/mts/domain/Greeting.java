@@ -1,5 +1,9 @@
-package hello;
+package com.anz.acorn.mts.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -20,10 +24,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @XmlRootElement(name = "greeting")
 //@XmlType(propOrder = {"id", "content"})
 //@JsonPropertyOrder({"content", "id"})
+@Entity
 public class Greeting {
 
 	@XmlElement
-	private final long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	
 	@XmlElement
 	private final String content;
@@ -68,6 +75,10 @@ public class Greeting {
 
 	public String getIsAnnotationRequired() {
 		return isAnnotationRequired;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

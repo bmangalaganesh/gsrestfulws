@@ -1,6 +1,5 @@
 package com.anz.acorn.mts.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,13 +16,14 @@ import com.anz.acorn.mts.persistence.JobsRepository;
 @RestController
 public class JobsController {
 
-	// @Autowired
-	// private JobsRepository repository;
+	@Autowired
+	private JobsRepository repository;
 
 	private static Logger log = LoggerFactory.getLogger(JobsController.class);
-	
-	static{
-		
+
+	// TODO remove this once I am satisifed that this is being called
+	static {
+
 		log.info("Is this ever called....");
 	}
 
@@ -35,22 +35,45 @@ public class JobsController {
 	 * 
 	 * @return
 	 */
-	
-	@RequestMapping(value = "/willthiswork", method = { RequestMethod.GET }, produces = { MediaType.ALL_VALUE })
+
+	@RequestMapping(value = "/jobs", method = { RequestMethod.GET }, produces = { MediaType.ALL_VALUE })
 	public List<Job> getAllJobs() {
 
 		log.info("This appears to work well");
-		//Iterable<Job> is returned and a cast is required here...
-		//return (List<Job>) repository.findAll();
-		
-		List<Job> theList = new ArrayList<Job>();
-		
-		theList.add(new Job());
-		
+
+		List<Job> theList = null;
+
+		// Iterable<Job> is returned and a cast is required here...
+		try {
+			theList = (List<Job>) repository.findAll();
+		} finally {
+			System.out.println("The list is:" + theList);
+		}
+
+		// new ArrayList<Job>();
+
+		// theList.add(new Job());
+
 		return theList;
-		//return " All the jobs...";
+		// return " All the jobs...";
 
 	}
 
+	/**
+	 * How to conver t the incoming body as a Job Object.
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/jobs", method = { RequestMethod.POST }, produces = { MediaType.ALL_VALUE })
+	public Job createJob(String userId) {
+
+		log.info("Request received to create a job for userid: " + userId);
+
+		Job aJob = null;
+
+		aJob = repository.save(aJob);
+		return aJob;
+
+	}
 
 }

@@ -36,7 +36,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<!--  Using the in-memory h2 database for the moment. Replace this with a DB2 and pick up config from the VCAP Services -->
+		<!--  Using the in-memory h2 database for the moment. Replace this with a DB2/MySQL and pick up config from the VCAP Services -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
