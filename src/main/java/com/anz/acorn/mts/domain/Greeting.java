@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.springframework.core.style.ToStringCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -22,22 +24,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 
 @XmlRootElement(name = "greeting")
-//@XmlType(propOrder = {"id", "content"})
-//@JsonPropertyOrder({"content", "id"})
+// @XmlType(propOrder = {"id", "content"})
+// @JsonPropertyOrder({"content", "id"})
 @Entity
 public class Greeting {
 
 	@XmlElement
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@XmlElement
-	private final String content;
-	
+	private String content;
+
 	@XmlElement
 	@JsonIgnore
-	//use Json Ignore if you want to explictly ignore a field from being marshalled as a Json payload
+	// use Json Ignore if you want to explictly ignore a field from being
+	// marshalled as a Json payload
 	private final String isAnnotationRequired;
 
 	//
@@ -79,6 +82,16 @@ public class Greeting {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return " Greeting info is id:" + id + " content:" + content;
+
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }
