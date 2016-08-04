@@ -21,49 +21,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 
-@XmlRootElement(name = "greeting")
-// @XmlType(propOrder = {"id", "content"})
-// @JsonPropertyOrder({"content", "id"})
 @Entity
 public class Greeting {
 
-	@XmlElement
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@XmlElement
 	private String content;
-
-	@XmlElement
-	@JsonIgnore
-	// use Json Ignore if you want to explictly ignore a field from being
-	// marshalled as a Json payload
-	private final String isAnnotationRequired;
 
 	//
 	/**
-	 * Creating a default constructor. Not having one results in an error when
-	 * the payload was set as XML Could not instantiate JAXBContext for class
-	 * [class hello.Greeting]: 1 counts of IllegalAnnotationExceptions; nested
-	 * exception is
-	 * com.sun.xml.internal.bind.v2.runtime.IllegalAnnotationsException: 1
-	 * counts of IllegalAnnotationExceptions hello.Greeting does not have a
-	 * no-arg default constructor. this problem is related to the following
-	 * location: at hello.Greeting
+	 * Creating a default constructor.
 	 */
 
 	public Greeting() {
 		this.id = 1;
 		content = "default";
-		isAnnotationRequired = "true";
 
 	}
 
-	public Greeting(long id, String content, String isAnnotationRequired) {
+	public Greeting(long id, String content) {
 		this.id = id;
 		this.content = content;
-		this.isAnnotationRequired = isAnnotationRequired;
+
 	}
 
 	public long getId() {
@@ -72,10 +53,6 @@ public class Greeting {
 
 	public String getContent() {
 		return content;
-	}
-
-	public String getIsAnnotationRequired() {
-		return isAnnotationRequired;
 	}
 
 	public void setId(long id) {
